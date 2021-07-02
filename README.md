@@ -33,10 +33,10 @@ https://developers.redhat.com/register
 
 ## Configure Red Hat Login
 
-Open and edit the file using any text editor vagrant/rhel8/vagrant/install-guest-additions.sh
+Open and edit the file using any text editor vagrant/rhel8/vagrant/activate-os.sh
 
 ```
-vi ./vagrant/rhel8/vagrant/install-guest-additions.sh
+vi ./vagrant/rhel8/vagrant/activate-os.sh
 ```
 
 Edit the following line and replace the <replaceme> with your username and password
