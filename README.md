@@ -1,7 +1,3 @@
----
-typora-copy-images-to: ./img
----
-
 # About
 
 This is a vagrant script that create a sandbox for Ansible Tower in RHEL8.
