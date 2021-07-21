@@ -79,32 +79,13 @@ Vagrant.configure("2") do |config|
         node.vm.provision "install-docker", type: "shell", :path => "#{GUEST_OS}/install-docker-2.sh"
         node.vm.provision "install-tower", type: "shell", :path => "#{GUEST_OS}/install-tower.sh"
         
+        node.trigger.before :destroy do |trigger|
+          trigger.warn = "Unregister"
+          trigger.run_remote = {inline: "subscription-manager remove --all"}
+        end
       end
   end
 
   
 
-  # Provision Managed Nodes
-  # (1..NUM_MANAGE_NODE).each do |i|
-  #   config.vm.define "manage-host-#{i}" do |node|
-  #       node.vm.provider "virtualbox" do |vb|
-  #           vb.name = "kubernetes-ha-worker-#{i}"
-  #           vb.memory = 512
-  #           vb.cpus = 1
-  #       end
-  #       node.vm.hostname = "manage-host-#{i}"
-  #       node.vm.network :private_network, ip: IP_NW + "#{MANAGE_IP_START + i}"
-	# 	node.vm.network "forwarded_port", guest: 22, host: "#{2720 + i}"
-
-  #       node.vm.provision "setup-hosts", :type => "shell", :path => "#{GUEST_OS}/vagrant/setup-hosts.sh" do |s|
-  #         s.args = ["eth1"]
-  #       end
-
-  #       node.vm.provision "setup-dns", type: "shell", :path => "#{GUEST_OS}/update-dns.sh"
-  #       node.vm.provision "install-guest", type: "shell", :path => "#{GUEST_OS}/vagrant/install-guest-additions.sh"
-  #       node.vm.provision :reload
-  #       node.vm.provision "install-guest2", type: "shell", :path => "#{GUEST_OS}/vagrant/install-guest-additions2.sh"
-        
-  #   end
-  # end
 end
